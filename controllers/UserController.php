@@ -4,6 +4,6 @@ class UserController
 {
     public function indexAction()
     {
-        
+
     }
 }
