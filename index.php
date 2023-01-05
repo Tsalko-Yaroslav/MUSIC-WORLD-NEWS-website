@@ -6,3 +6,6 @@ spl_autoload_register(function($className)
 });
 
 $core = core\Core::getInstance();
+$core->Initialize();
+$core->Run();
+$core->Done();
