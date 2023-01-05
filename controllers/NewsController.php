@@ -1,13 +1,26 @@
 <?php
+
 namespace controllers;
-class NewsController
+
+use core\Controller;
+use core\Template;
+
+class NewsController extends Controller
 {
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
     public function viewAction()
     {
-        echo 'view';
+        return $this->Render();
     }
+
     public function indexAction()
     {
-        echo 'index';
+        return $this->Render(null, [
+            'title' => 'Список новин'
+        ]);
     }
 }

@@ -8,11 +8,12 @@ class MainController
     {
         echo "MainPage";
     }
+
     public function errorAction($code)
     {
-        switch($code)
-        {
-            case 404: echo 'Error 404';
+        switch ($code) {
+            case 404:
+                echo 'Error 404';
                 break;
         }
     }
