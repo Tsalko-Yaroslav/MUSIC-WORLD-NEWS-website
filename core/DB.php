@@ -56,9 +56,9 @@ class DB
 
     }
 
-    public function insert_into($tableName, $newRowArr)
+    public function insert($tableName, $newRowArr)
     {
-
+        
         $fieldsArray = array_keys($newRowArr);
         $fildsListString = implode(', ', $fieldsArray);
         $paramsArr = [];
