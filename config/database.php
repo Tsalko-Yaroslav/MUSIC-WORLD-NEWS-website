@@ -1,6 +1,6 @@
 <?php
 
-define('DATABASE_HOST', 'localhost');
-define('DATABASE_LOGIN', 'administrator');
-define('DATABASE_PASSWORD', 'qwerty');
-define('DATABASE_BASENAME', 'MusicWorldNewsDB');
+const DATABASE_HOST = 'localhost';
+const DATABASE_LOGIN = 'administrator';
+const DATABASE_PASSWORD = 'qwerty';
+const DATABASE_BASENAME = 'mwndb';
