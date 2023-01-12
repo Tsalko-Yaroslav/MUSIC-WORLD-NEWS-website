@@ -2,6 +2,7 @@
 
 namespace core;
 
+/** database query execution class */
 class DB
 {
     protected $pdo;
@@ -12,23 +13,23 @@ class DB
 
     }
 
-    public function select($tableName, $fildsList = "*", $conditionArr = null)
-    {
-        if (is_string($fildsList)) {
-            $fieldsListString = $fildsList;
-        }
-        if (is_array($fildsList)) {
-            $fieldsListString = implode(', ', $fildsList);
-        }
-
-        if (is_array($conditionArr)) {
+    public function select(string $tableName, $fieldsList = "*",
+                                  $conditionArray = null) {
+        if (is_string($fieldsList))
+            $fieldsListString = $fieldsList;
+        if (is_array($fieldsList))
+            $fieldsListString = implode(', ', $fieldsList);
+        $wherePart = "";
+        if (is_array($conditionArray)) {
             $parts = [];
-            foreach ($conditionArr as $key => $value) {
-                $parts[] = "{$key} = :{$key}";
+            foreach ($conditionArray as $key => $value) {
+                $parts [] = "{$key} = :{$key}";
             }
-            $wherePart = "WHERE" . implode(' AND ', $parts);
+            $wherePartString = "WHERE ".implode(' AND ', $parts);
         }
-        $res = $this->pdo->prepare("SELECT {$fieldsListString} FROM {$tableName} {$wherePart}");
+        $res = $this->pdo->prepare(
+            "SELECT {$fieldsListString} FROM {$tableName} {$wherePartString}");
+        $res->execute($conditionArray);
         return $res->fetchAll(\PDO::FETCH_ASSOC);
     }
 

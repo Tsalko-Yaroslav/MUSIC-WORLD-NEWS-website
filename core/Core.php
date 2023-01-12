@@ -8,10 +8,15 @@ class Core
 {
     private static $instance = null;
     public $app;
+    public $pageParams;
     public $db;
+    public $requestMethod;
+
     private function __construct()
     {
+        global $pageParams;
         $this->app = [];
+        $this->pageParams = $pageParams;
     }
 
     public static function getInstance()
@@ -24,8 +29,10 @@ class Core
 
     public function Initialize()
     {
+        session_start();
         $this->db = new DB(DATABASE_HOST, DATABASE_LOGIN,
             DATABASE_PASSWORD, DATABASE_BASENAME);
+        $this->requestMethod = $_SERVER['REQUEST_METHOD'];
     }
 
     public function Run()
@@ -71,6 +78,7 @@ class Core
         $pathToLayout = 'themes/main/layout.php';
         $template = new Template($pathToLayout);
         $template->setParametr('content', $this->app['actRes']);
+        $template->SerParameters($this->pageParams);
         $html = $template->getHTML();
         echo $html;
     }
