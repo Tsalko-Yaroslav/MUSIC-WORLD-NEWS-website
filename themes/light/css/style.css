@@ -60,4 +60,62 @@
     white-space: nowrap;
     -webkit-overflow-scrolling: touch;
 }
+.myCards{
+    transition-duration: 0.5s;
+}
+.myCards:hover{
+    background-color: aliceblue;
+    scale: 105%;
+}
+.blackButtons{
+    transition-duration: 0.3s;
+    background-color: black;
+    color: white;
+    border-color: black;
+}
+.blackButtons:hover{
+    background-color: white;
+    border-color: black;
+    color: black;
 
+}
+
+.logo{
+    transition-duration: 0.3s;
+}
+.logo:hover{
+    scale: 110%;
+}
+.redButtons{
+    transition-duration: 0.3s;
+    background-color: red;
+    color: black;
+    border-color: black;
+    width: 100px;
+    height: 50px;
+    font-size: 20px;
+    text-align: center;
+}
+.redButtons:hover{
+    background-color: orangered;
+    color: black;
+
+}
+.greenButtons{
+    transition-duration: 0.3s;
+    background-color: green;
+    color: black;
+    border-color: black;
+    width: 100px;
+    height: 50px;
+    font-size: 20px;
+    text-align: center;
+}
+.greenButtons:hover{
+    background-color: greenyellow;
+    color: black;
+
+}
+a{
+    text-decoration: none;
+}

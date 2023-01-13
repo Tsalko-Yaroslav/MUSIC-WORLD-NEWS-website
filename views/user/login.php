@@ -32,7 +32,7 @@ core\Core::getInstance()->pageParams['title'] ='Вхід в аккаунт'
 
 
 
-        <button class=" w-100 btn btn-dark btn-primary  " type="submit">Увійти</button>
+        <button class=" w-100 btn blackButtons btn-primary  " type="submit">Увійти</button>
         <p class="mt-5 mb-3 text-muted">© 2022–2023</p>
     </form>
 </main>

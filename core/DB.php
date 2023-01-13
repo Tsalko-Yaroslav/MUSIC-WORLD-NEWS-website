@@ -36,25 +36,21 @@ class DB
     public function Update($tableName, $newValuesArray, $conditionArray)
     {
         $setParts = [];
-        $paramsArr = [];
+        $paramsArray = [];
         foreach ($newValuesArray as $key => $value) {
-
-
             $setParts [] = "{$key} = :set{$key}";
-            $paramsArr['set' . $key] = $value;
+            $paramsArray['set'.$key] = $value;
         }
         $setPartString = implode(', ', $setParts);
 
         $whereParts = [];
         foreach ($conditionArray as $key => $value) {
-            $whereParts[] = "{$key} = :{$key}";
-            $paramsArr[$key] = $value;
+            $whereParts [] = "{$key} = :{$key}";
+            $paramsArray[$key] = $value;
         }
-        $wherePartString = "WHERE" . implode(' AND ', $whereParts);
-        $res = $this->pdo->prepare("UPDATE {$tableName} SET {$setPartString}
-         {$wherePartString}");
-        return $res->execute($paramsArr);
-
+        $wherePartString = "WHERE ".implode(' AND ', $whereParts);
+        $res = $this->pdo->prepare("UPDATE {$tableName} SET {$setPartString} {$wherePartString}");
+        $res->execute($paramsArray);
     }
 
     public function insert($tableName, $newRowArr)
@@ -72,15 +68,14 @@ class DB
         $res->execute($newRowArr);
     }
 
-    public function delete($tableName, $conditionArr)
-    {
+    public function delete($tableName, $conditionArray) {
         $whereParts = [];
-        foreach ($conditionArr as $key => $value) {
-            $whereParts[] = "{$key} = :{$key}";
-            $paramsArr[$key] = $value;
+        foreach ($conditionArray as $key => $value) {
+            $whereParts [] = "{$key} = :{$key}";
+            $paramsArray[$key] = $value;
         }
-        $wherePartString = "WHERE" . implode(' AND ', $whereParts);
-        $res = $this->pdo->prepare("DELETE FROM {$tableName} {$wherePartString})");
-        $res->execute($conditionArr);
+        $wherePartString = "WHERE ".implode(' AND ', $whereParts);
+        $res = $this->pdo->prepare("DELETE FROM {$tableName} {$wherePartString}");
+        $res->execute($conditionArray);
     }
 }

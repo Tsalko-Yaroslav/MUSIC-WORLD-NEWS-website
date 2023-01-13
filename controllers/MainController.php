@@ -17,6 +17,9 @@ class MainController extends Controller
             case 404:
                 return $this->Render('views/main/error.php');
                 break;
+            case 403:
+                return $this->Render('views/main/error.php');
+                break;
         }
     }
 }

@@ -64,7 +64,7 @@ else
                 <a href="/" class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
 
 
-                    <img style="margin-left: 3.5rem" src="../../themes/light/images/guitar.png" width="100" height="100" alt="kkk">
+                    <img class="logo" style="margin-left: 3.5rem" src="../../themes/light/images/guitar.png" width="100" height="100" alt="kkk">
                 </a>
 
                 <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
@@ -116,7 +116,7 @@ else
                     <a href="/user/logout" class="btn btn-light text-dark me-2">Вийти</a>
                 <?php else:?>
                 <a href="/user/login" class="btn btn-light  me-2 ">Увійти</a>
-                <a href="/user/register" class="btn btn-dark btn-primary">Зареєструватися</a>
+                <a href="/user/register" class="blackButtons btn  btn-primary">Зареєструватися</a>
                 <?php endif;?>
             </div>
         </div>

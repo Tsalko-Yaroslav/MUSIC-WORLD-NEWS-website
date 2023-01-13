@@ -47,7 +47,7 @@ core\Core::getInstance()->pageParams['title'] = 'Реєстрація'
         </div>
 
 
-        <button class="w-100 btn btn-lg btn-primary btn-dark" type="submit">Увійти</button>
+        <button class="w-100 btn btn-lg btn-primary blackButtons" type="submit">Зареєструватись</button>
         <p class="mt-5 mb-3 text-muted">© 2022–2023</p>
     </form>
 </main>
