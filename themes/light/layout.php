@@ -71,8 +71,7 @@ else
 
                 <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
                     <li>
-                        <a href="#" class="nav-link text-secondary">
-                            <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#home"></use></svg>
+                        <a href="/" class="nav-link text-secondary">
                             Головна
                         </a>
                     </li>
@@ -83,17 +82,13 @@ else
                         </a>
                     </li>-->
                     <li>
-                        <a href="#" class="nav-link text-white">
+                        <a href="/news" class="nav-link text-white">
 
-                            <svg class="bi d-block mx-auto mb-1" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" c viewBox="0 0 16 16">
-                                <path d="M2 15.5a.5.5 0 0 0 .74.439L8 13.069l5.26 2.87A.5.5 0 0 0 14 15.5V2a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v13.5zM8 4.41c1.387-1.425 4.854 1.07 0 4.277C3.146 5.48 6.613 2.986 8 4.412z"/>
-                            </svg>
-                            Улюблене
+                            Новини
                         </a>
                     </li
                     <li>
                         <a href="/Category" class="nav-link text-white">
-                            <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#grid"></use></svg>
                             Категорії
                         </a>
                     </li>

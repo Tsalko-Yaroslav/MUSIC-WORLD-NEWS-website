@@ -9,13 +9,34 @@ class News
 {
     protected static $tableName = 'Genre_news';
 
-    public static function addNews($row)
+    public static function addNews($row,$path)
     {
-        $fieldsList = ['Genre_ID', 'News_name', 'short_discription',
-            'News_text_content','News_text_content_2', 'Photo_link','content_photo','content_photo_2', 'Author_id', 'date'];
-        $row = utils::filterArray($row, $fieldsList);
+        if(!empty($path)) {
 
-        Core::getInstance()->db->insert(self::$tableName, $row);
+
+            do {
+                $fileName = uniqid() . '.jpg';
+                $newPath = "files/news/{$fileName}";
+            } while (file_exists($newPath));
+        }
+        else{
+            $newPath = "static/images/NOIMG.jpg";
+        }
+        move_uploaded_file($path,$newPath);
+
+
+        Core::getInstance()->db->insert(self::$tableName, [
+            'Genre_ID'=>$row['Genre_ID'],
+            'News_name'=>$row['News_name'],
+            'short_discription'=>$row['short_discription'],
+            'News_text_content'=>$row['News_text_content'],
+            'Photo_link'=>"../../{$newPath}",
+            'Author_name'=>$row['Author_name'],
+            'date'=> date('Y-m-d')
+
+        ]);
+
+
     }
 
     public static function deleteNews($id)
@@ -28,7 +49,7 @@ class News
     public static function updateNews($id, $newRow)
     {
         $fieldsList = ['Genre ID', 'News_name', 'short_discription',
-            'News_text_content', 'Photo_link', 'content_photo','Author_id', 'date'];
+            'News_text_content', 'Photo_link', 'content_photo', 'Author_id', 'date'];
         $newRow = utils::filterArray($newRow, $fieldsList);
         Core::getInstance()->db->Update(self::$tableName, $newRow, [
             'id' => $id
@@ -45,11 +66,17 @@ class News
         else
             return null;
     }
+
     public static function getNewsInCategory($genre_id)
     {
-        $rows = Core::getInstance()->db->select(self::$tableName,'*',[
-           'Genre_ID' => $genre_id
+        $rows = Core::getInstance()->db->select(self::$tableName, '*', [
+            'Genre_ID' => $genre_id
         ]);
+        return $rows;
+    }
+    public static function GetNews()
+    {
+        $rows = Core::getInstance()->db->select(self::$tableName);
         return $rows;
     }
 

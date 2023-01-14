@@ -13,7 +13,7 @@ core\Core::getInstance()->pageParams['title'] = 'Створення новини
             <h4 class="h3 mb-3 fw-normal "><b>Додайте фото на обкладинку</b></h4>
             <div class="input-group">
 
-                <input name="Genre_photolink" type="file" class="form-control" id="Genre_photolink"
+                <input name="Photo_link" type="file" class="form-control" id="Photo_link"
                        aria-describedby="inputGroupFileAddon04" aria-label="Upload" accept="image/jpeg">
 
             </div>
@@ -49,23 +49,20 @@ core\Core::getInstance()->pageParams['title'] = 'Створення новини
             <?php endif; ?>
             <hr>
             <h1 class="h3 mb-3 fw-normal text-center"><b>Додайте контент новини</b></h1>
-            <div class="input-group">
-                <input multiple name="content_photo" type="file" class="form-control" id="content_photo"
-                       aria-describedby="inputGroupFileAddon04" aria-label="Upload" accept="image/jpeg">
-            </div>
+
 
             <div class="form-floating w-100">
                 <textarea class="ckeditor" name="News_text_content" id="News_text_content"
                           style="width: 1295px; height: 300px"></textarea>
             </div>
             <hr>
-            <div class="input-group">
-                <input multiple name="content_photo_2" type="file" class="form-control" id="content_photo"
-                       aria-describedby="inputGroupFileAddon04" aria-label="Upload" accept="image/jpeg">
+
+
             </div>
             <div class="form-floating w-100">
-                <textarea class="ckeditor" name="News_text_content_2" id="News_text_content"
-                          style="width: 1295px; height: 300px"></textarea>
+                <input type="text" class="form-control w-100" name="Author_name" id="Author_name" v
+                       placeholder="name@example.com">
+                <label for="Author_name">Введіть ім'я автора(Обов'язково)</label>
             </div>
 
 

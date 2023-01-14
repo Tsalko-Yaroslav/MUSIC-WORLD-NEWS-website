@@ -13,10 +13,15 @@ class NewsController extends Controller
 {
     public function indexAction()
     {
+        $rows = News::getNews();
         if (User::isAuthor())
-            return $this->Render('views/news/index-admin.php', null);
+            return $this->Render('views/news/index-admin.php', [
+                'rows'=>$rows
+            ]);
         else
-            return $this->Render();
+            return $this->Render(null,[
+                'rows'=>$rows
+            ]);
     }
 
     public function addAction()
@@ -32,8 +37,10 @@ class NewsController extends Controller
                 $errors['Genre_ID'] = 'Категорія порожня';
             if (empty($_POST['short_discription']))
                 $errors['short_discription'] = 'Короткий опис порожній';
+            if (empty($_POST['Author_name']))
+                $errors['Author_name'] = 'Не вказано ініціали автора';
             if (empty($errors)) {
-                News::addNews($_POST);
+                News::addNews($_POST,$_FILES['Photo_link']['tmp_name']);
                 return $this->redirect('/news');
             } else {
                 $model = $_POST;
@@ -49,6 +56,16 @@ class NewsController extends Controller
         }
         return $this->Render(null, [
             'categories' => $categoriesList
+        ]);
+    }
+    public function viewAction($params)
+    {
+        $id = intval($params[0]);
+        $category = Category::getCategoryById($id);
+        $news = News::getNewsInCategory($id);
+        return $this->Render(null,[
+            'category'=>$category,
+            'news'=>$news
         ]);
     }
 }
