@@ -39,19 +39,23 @@ class Category
         }else
             return null;
     }
+    public static function deletePhotoFile($id){
+        $row = self::getCategoryById($id);
+        $photoPath = $row['Genre_photolink'];
+
+        if(is_file($photoPath))
+            unlink($photoPath);
+    }
     public static function deleteCategory($id)
     {
+
         Core::getInstance()->db->delete(self::$tableName,[
             'id'=>$id
         ]);
     }
     public static function changePhoto($id,$newPhoto)
     {
-        $row = self::getCategoryById($id);
-        $photoPath = $row['Genre_photolink'];
-
-        if(is_file($photoPath))
-            unlink($photoPath);
+        self::deletePhotoFile($id);
         do {
             $fileName = uniqid() . '.jpg';
             $newPath = "files/category/{$fileName}";

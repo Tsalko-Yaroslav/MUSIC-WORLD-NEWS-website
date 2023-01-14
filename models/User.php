@@ -93,5 +93,10 @@ class User
         $user = User::getCurrentAuthenticatedUser();
         return $user['access_level'] == 3;
     }
+    public static function isAuthor()
+    {
+        $user = User::getCurrentAuthenticatedUser();
+        return $user['access_level'] >= 2;
+    }
 
 }

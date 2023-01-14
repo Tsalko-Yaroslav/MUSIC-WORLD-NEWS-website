@@ -27,6 +27,7 @@ class DB
             }
             $wherePartString = "WHERE ".implode(' AND ', $parts);
         }
+
         $res = $this->pdo->prepare(
             "SELECT {$fieldsListString} FROM {$tableName} {$wherePartString}");
         $res->execute($conditionArray);
@@ -55,7 +56,7 @@ class DB
 
     public function insert($tableName, $newRowArr)
     {
-        
+
         $fieldsArray = array_keys($newRowArr);
         $fildsListString = implode(', ', $fieldsArray);
         $paramsArr = [];

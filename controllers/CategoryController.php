@@ -6,6 +6,7 @@ use core\Controller;
 use core\Core;
 use core\Error;
 use models\Category;
+use models\News;
 use models\User;
 
 class CategoryController extends Controller
@@ -113,5 +114,15 @@ class CategoryController extends Controller
             ]);
         } else
             return $this->error(403, '');
+    }
+    public function viewAction($params)
+    {
+        $id = intval($params[0]);
+        $category = Category::getCategoryById($id);
+        $news = News::getNewsInCategory($id);
+        return $this->Render(null,[
+           'category'=>$category,
+            'news'=>$news
+        ]);
     }
 }
