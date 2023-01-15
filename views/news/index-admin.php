@@ -18,33 +18,28 @@ use \models\User;
 
 ?>
 
-<?php foreach ($rows as $row): ?>
-    <?php
-    $tmpdate=explode('-',$row['date']);
-    $date = "{$tmpdate[2]}.{$tmpdate[1]}.{$tmpdate[0]}";
-    ?>
-    <div class="categCards myCards">
-
-        <a style="color: black" href="/news/view/<?= $row['id']?>">
-            <div class="row">
-                <div class="col-2">
-                    <img src="<?= $row['Photo_link']?>" class="card-img-top w-100" alt="...">
-                </div>
-                <div class=col-10>
-                    <div class="card-body">
-                        <p class="card-text"><B><?= $row['News_name'] ?></B></p>
-                        <hr>
-                        <p style="font-size: 20px"><?= $row['Author_name'] ?> </p>
-                        <p style="font-size: 14px"><?= $date ?></p>
-                    </div>
+<div class = "row">
+    <?php foreach ($rows as $row): ?>
+        <?php
+        $tmpdate = explode('-', $row['date']);
+        $date = "{$tmpdate[2]}.{$tmpdate[1]}.{$tmpdate[0]}";
+        ?>
+        <div class = "col-3 mt-5">
+            <div class="categCards myCards" style="width: 5rem" data-date="<?= $date ?>">
+                <div class="card" style="width: 18rem;">
+                    <a style="color: black" href="/news/view/<?= $row['id'] ?>">
+                        <img src="<?= $row['Photo_link'] ?>" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <p class="card-text"><B><?= $row['News_name'] ?></B></p>
+                            <p style="font-size: 20px"><?= $row['Author_name'] ?> </p>
+                            <p style="font-size: 14px"><?= $date ?></p>
+                            <a href="/news/edit/<?= $row['id']?>" class="btn btn-sm btn-outline-secondary">Редагувати</a>
+                        </div>
+                    </a>
                 </div>
             </div>
-        </a>
-    </div>
-    <hr>
-
-
-<?php endforeach; ?>
-
+        </div>
+    <?php endforeach; ?>
+</div>
 
 

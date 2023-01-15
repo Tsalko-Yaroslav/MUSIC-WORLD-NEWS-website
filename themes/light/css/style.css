@@ -125,3 +125,10 @@ a{
     text-decoration: none;
     font-size: 24px;
 }
+
+.headerButtons{
+    color: white;
+}
+.headerButtons:hover {
+    color: slategrey;
+}

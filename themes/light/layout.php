@@ -31,7 +31,7 @@ else
           integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <link rel="stylesheet" href="/themes/light/css/style.css" />
 </head>
-<body>
+<body >
 
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
     <symbol id="bootstrap" viewBox="0 0 118 94">
@@ -70,8 +70,8 @@ else
                 </a>
 
                 <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
-                    <li>
-                        <a href="/" class="nav-link text-secondary">
+                    <li >
+                        <a href="/" class="nav-link headerButtons">
                             Головна
                         </a>
                     </li>
@@ -82,13 +82,13 @@ else
                         </a>
                     </li>-->
                     <li>
-                        <a href="/news" class="nav-link text-white">
+                        <a href="/news" class="nav-link  headerButtons">
 
                             Новини
                         </a>
                     </li
                     <li>
-                        <a href="/Category" class="nav-link text-white">
+                        <a href="/Category" class="nav-link headerButtons">
                             Категорії
                         </a>
                     </li>
@@ -120,7 +120,7 @@ else
     </div>
 </header>
 </div>
-<div class="container">
+<div class="container" style="background: white">
     <?= $content ?>
 </div>
 

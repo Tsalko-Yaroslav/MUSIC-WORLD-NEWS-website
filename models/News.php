@@ -48,12 +48,39 @@ class News
 
     public static function updateNews($id, $newRow)
     {
-        $fieldsList = ['Genre ID', 'News_name', 'short_discription',
-            'News_text_content', 'Photo_link', 'content_photo', 'Author_id', 'date'];
-        $newRow = utils::filterArray($newRow, $fieldsList);
-        Core::getInstance()->db->Update(self::$tableName, $newRow, [
+
+        Core::getInstance()->db->Update(self::$tableName, [
+            'Genre_ID'=>$newRow['Genre_ID'],
+            'News_name'=>$newRow['News_name'],
+            'short_discription'=>$newRow['short_discription'],
+            'News_text_content'=>$newRow['News_text_content'],
+            'Author_name'=>$newRow['Author_name'],
+            'date'=> date('Y-m-d')
+        ], [
             'id' => $id
         ]);
+    }
+    public static function changePhoto($id,$newPhoto)
+    {
+        self::deletePhotoFile($id);
+        do {
+            $fileName = uniqid() . '.jpg';
+            $newPath = "files/news/{$fileName}";
+        } while (file_exists($newPath));
+        move_uploaded_file($newPhoto,$newPath);
+        Core::getInstance()->db->update(self::$tableName,[
+
+            'Photo_link' =>"../../{$newPath}"
+        ],[
+            'id'=>$id
+        ]);
+    }
+    public static function deletePhotoFile($id){
+        $row = self::getNewsById($id);
+        $photoPath = $row['Photo_link'];
+
+        if(is_file($photoPath))
+            unlink($photoPath);
     }
 
     public static function getNewsById($id)
