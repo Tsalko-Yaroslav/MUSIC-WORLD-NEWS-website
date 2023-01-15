@@ -65,7 +65,7 @@
 }
 .myCards:hover{
     background-color: aliceblue;
-    scale: 105%;
+    scale: 101%;
 }
 .blackButtons{
     transition-duration: 0.3s;

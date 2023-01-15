@@ -1,6 +1,9 @@
 <?php
 /** @var array $category */
 /** @var array $news */
+
+use models\User;
+
 ?>
 <?php
 
@@ -11,7 +14,7 @@
         $tmpdate=explode('-',$new['date']);
         $date = "{$tmpdate[2]}.{$tmpdate[1]}.{$tmpdate[0]}";
     ?>
-    <div class="categCards myCards">
+    <div class="categCards myCards ">
 
         <a style="color: black" href="/news/view/<?= $new['id']?>">
             <div class="row">
@@ -25,7 +28,11 @@
                         <p style="font-size: 20px"><?= $new['Author_name'] ?> </p>
                         <p style="font-size: 14px"><?= $date ?></p>
                     </div>
+                      <?php if (User::isAdmin()): ?>
+                    <a href="/news/edit/<?= $new['id']?>" class="btn btn-sm blackButtons">Редагувати</a>
+                    <?php endif;?>
                 </div>
+
             </div>
         </a>
     </div>

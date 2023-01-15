@@ -67,10 +67,14 @@ class NewsController extends Controller
 
     public function viewAction($params)
     {
-        $id = intval($params[0]);
-        $news = News::getNewsById($id);
-        return $this->Render(null, [
+        $idn = intval($params[0]);
+        $news = News::getNewsById($idn);
+        $id = intval($news['Genre_ID']);
+        $rows = News::getNewsInCategory($id);
 
+
+        return $this->Render(null, [
+            'rows'=>$rows,
             'news' => $news
         ]);
     }
