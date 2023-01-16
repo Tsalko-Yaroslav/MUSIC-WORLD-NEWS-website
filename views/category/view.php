@@ -13,6 +13,9 @@ use models\User;
     <?php
         $tmpdate=explode('-',$new['date']);
         $date = "{$tmpdate[2]}.{$tmpdate[1]}.{$tmpdate[0]}";
+    $id = User::getUserIdByName($new['Author_name']);
+
+    $id = $id['id'];
     ?>
     <div class="categCards myCards ">
 
@@ -25,7 +28,7 @@ use models\User;
                     <div class="card-body">
                         <p class="card-text"><B><?= $new['News_name'] ?></B></p>
                         <hr>
-                        <p style="font-size: 20px"><?= $new['Author_name'] ?> </p>
+                        <a href="/user/view/<?= $id ?>" style="font-size: 20px"><?= $new['Author_name'] ?> </a>
                         <p style="font-size: 14px"><?= $date ?></p>
                     </div>
                       <?php if (User::isAdmin()): ?>

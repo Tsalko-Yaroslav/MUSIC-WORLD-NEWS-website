@@ -132,3 +132,6 @@ a{
 .headerButtons:hover {
     color: slategrey;
 }
+.adminCards{
+    border: 1px solid black !important;
+}

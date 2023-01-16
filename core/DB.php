@@ -79,4 +79,11 @@ class DB
         $res = $this->pdo->prepare("DELETE FROM {$tableName} {$wherePartString}");
         $res->execute($conditionArray);
     }
+    public function sortByDate($tableName)
+    {
+        $res = $this->pdo->prepare(
+            "SELECT * FROM {$tableName} ORDER BY date DESC");
+        $res->execute();
+        return $res->fetchAll(\PDO::FETCH_ASSOC);
+    }
 }

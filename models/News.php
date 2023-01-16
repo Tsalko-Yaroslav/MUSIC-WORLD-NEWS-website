@@ -8,6 +8,8 @@ use core\utils;
 class News
 {
     protected static $tableName = 'Genre_news';
+    protected static $userFirstName;
+    protected static $userSecondName;
 
     public static function addNews($row,$path)
     {
@@ -23,22 +25,48 @@ class News
             $newPath = "static/images/NOIMG.jpg";
         }
         move_uploaded_file($path,$newPath);
+        $user = User::getCurrentAuthenticatedUser();
 
-
+        $userFirstName = $user['Firstname'];
+        $userSecondName = $user['Surname'];
         Core::getInstance()->db->insert(self::$tableName, [
             'Genre_ID'=>$row['Genre_ID'],
             'News_name'=>$row['News_name'],
             'short_discription'=>$row['short_discription'],
             'News_text_content'=>$row['News_text_content'],
             'Photo_link'=>"../../{$newPath}",
-            'Author_name'=>$row['Author_name'],
-            'date'=> date('Y-m-d')
+            'Author_name'=>"$userFirstName $userSecondName",
+            'date'=> date('Y-m-d'),
+            'day_time'=>time('h:m:s')
 
         ]);
 
 
     }
+    public static function getNewsByAuthor($user)
+    {
 
+        $userFirstName = $user[0]['Firstname'];
+        $userSecondName = $user[0]['Surname'];
+        $name = "$userFirstName $userSecondName";
+        $rows = Core::getInstance()->db->select(self::$tableName, '*', [
+            'Author_name' => $name
+        ]);
+        return $rows;
+
+    }
+    public static function getNewsByAuthorAs($user)
+    {
+
+        $userFirstName = $user['Firstname'];
+        $userSecondName = $user['Surname'];
+        $name = "$userFirstName $userSecondName";
+        $rows = Core::getInstance()->db->select(self::$tableName, '*', [
+            'Author_name' => $name
+        ]);
+        return $rows;
+
+    }
     public static function deleteNews($id)
     {
         Core::getInstance()->db->delete(self::$tableName, [
@@ -48,13 +76,16 @@ class News
 
     public static function updateNews($id, $newRow)
     {
+        $user = User::getCurrentAuthenticatedUser();
 
+        $userFirstName = $user['Firstname'];
+        $userSecondName = $user['Surname'];
         Core::getInstance()->db->Update(self::$tableName, [
             'Genre_ID'=>$newRow['Genre_ID'],
             'News_name'=>$newRow['News_name'],
             'short_discription'=>$newRow['short_discription'],
             'News_text_content'=>$newRow['News_text_content'],
-            'Author_name'=>$newRow['Author_name'],
+            'Author_name'=>"$userFirstName $userSecondName",
             'date'=> date('Y-m-d')
         ], [
             'id' => $id
@@ -106,5 +137,11 @@ class News
         $rows = Core::getInstance()->db->select(self::$tableName);
         return $rows;
     }
+    public static function getSortedNewsASC()
+    {
+        $rows = Core::getInstance()->db->sortByDate(self::$tableName);
+        return $rows;
+    }
+
 
 }

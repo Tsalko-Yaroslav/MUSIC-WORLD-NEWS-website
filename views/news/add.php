@@ -59,11 +59,7 @@ core\Core::getInstance()->pageParams['title'] = 'Створення новини
 
 
             </div>
-            <div class="form-floating w-100">
-                <input type="text" class="form-control w-100" name="Author_name" id="Author_name" v
-                       placeholder="name@example.com">
-                <label for="Author_name">Введіть ім'я автора(Обов'язково)</label>
-            </div>
+
 
 
             <div style="height: 200px; width: 200px; margin: auto; ">

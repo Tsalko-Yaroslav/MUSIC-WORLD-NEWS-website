@@ -1,31 +1,24 @@
 <?php
-use \models\User;
-?>
-<h1>NEWS</h1>
-
-
-<?if(User::isAdmin() or User::isAuthor()): ?>
-
-    <p style="text-align: center"><a href="/news/add" class="w-20 btn btn-lg btn-primary blackButtons" type="submit">Додати новину</a></p>
-
-
-<?php endif;?>
-<?php
+use models\User;
 /** @var array $rows */
-/** @var array $news */
-?>
-<?php
-
+$user=User::getCurrentAuthenticatedUser();
 ?>
 
+<div>
+    <h2>Логін:</h2>
+    <p><?= $user['login']?></p>
+    <h2>Ім'я користвувача:</h2>
+    <p><?= $user['Firstname']?> <?= $user['Surname']?></p>
+    <p>Ви журналіст!</p>
+</div>
+<hr>
+<h1>Ваші пости:</h1>
+<hr>
 <div class = "row">
     <?php foreach ($rows as $row): ?>
         <?php
         $tmpdate = explode('-', $row['date']);
         $date = "{$tmpdate[2]}.{$tmpdate[1]}.{$tmpdate[0]}";
-        $id = User::getUserIdByName($row['Author_name']);
-
-        $id = $id['id'];
         ?>
 
         <div class="categCards myCards">
@@ -39,8 +32,7 @@ use \models\User;
                         <div class="card-body">
                             <p class="card-text"><B><?= $row['News_name'] ?></B></p>
                             <hr>
-                            <a href="/user/view/<?= $id ?>" style="font-size: 20px"><?= $row['Author_name'] ?> </a>
-
+                            <p style="font-size: 20px"><?= $row['Author_name'] ?> </p>
                             <p style="font-size: 14px"><?= $date ?></p>
 
                         </div>
@@ -53,6 +45,4 @@ use \models\User;
         <hr>
     <?php endforeach; ?>
 </div>
-
-
 

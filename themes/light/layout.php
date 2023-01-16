@@ -92,12 +92,14 @@ else
                             Категорії
                         </a>
                     </li>
-                   <!-- <li>
-                        <a href="#" class="nav-link text-white">
-                            <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#people-circle"></use></svg>
+                    <?php if(User::isUserAuthenticated()):?>
+                  <li>
+                        <a href="/user" class="nav-link headerButtons">
+
                             Профіль
                         </a>
-                    </li>-->
+                    </li>
+                    <?php endif;?>
                 </ul>
             </div>
         </div>
@@ -120,7 +122,7 @@ else
     </div>
 </header>
 </div>
-<div class="container" style="background: white">
+<div class="container" >
     <?= $content ?>
 </div>
 

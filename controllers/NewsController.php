@@ -15,7 +15,7 @@ class NewsController extends Controller
     public function indexAction()
     {
         $rows = News::getNews();
-        if (User::isAuthor())
+        if (User::isAdmin() or User::isAuthor())
             return $this->Render('views/news/index-admin.php', [
                 'rows' => $rows
             ]);
@@ -43,9 +43,9 @@ class NewsController extends Controller
                 $errors['Genre_ID'] = 'Категорія порожня';
             if (empty($_POST['short_discription']))
                 $errors['short_discription'] = 'Короткий опис порожній';
-            if (empty($_POST['Author_name']))
-                $errors['Author_name'] = 'Не вказано ініціали автора';
+
             if (empty($errors)) {
+
                 News::addNews($_POST, $_FILES['Photo_link']['tmp_name']);
                 return $this->redirect('/news');
             } else {
@@ -84,7 +84,7 @@ class NewsController extends Controller
 
         $id = intval($params[0]);
         $categoriesList = Category::getCategories();
-        if (!User::isAdmin())
+        if (!User::isAdmin() and !User::isAuthor())
             return $this->error('403', 'Немає доступу!');
         if ($id > 0) {
             $news = News::getNewsById($id);
@@ -121,6 +121,28 @@ class NewsController extends Controller
         } else {
             return $this->error('403', 'Немає доступу!');
         }
+    }
+    public function deleteAction($params)
+    {
+        $id = intval($params[0]);
+        $yes = boolval($params[1] === 'yes');
+        if (!User::isAdmin())
+            return $this->error(403, '');
+        if ($id > 0) {
+            $news = News::getNewsById($id);
+            if ($yes) {
+                $filePath = $news['Photo_link'];
+                if (is_file($filePath))
+                    unlink($filePath);
+
+                News::deleteNews($id);
+                return $this->redirect('/news/');
+            }
+            return $this->render(null, [
+                'news' => $news
+            ]);
+        } else
+            return $this->error(403, '');
     }
 
 }

@@ -62,11 +62,7 @@ core\Core::getInstance()->pageParams['title'] = 'Редагування нови
 
 
 </div>
-<div class="form-floating w-100">
-    <input type="text" class="form-control w-100" name="Author_name" id="Author_name"
-           placeholder="name@example.com" value="<?= $news['Author_name']; ?>">
-    <label for="Author_name">Введіть ім'я автора(Обов'язково)</label>
-</div>
+
 
 
 <div style="height: 200px; width: 200px; margin: auto; ">
