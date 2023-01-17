@@ -31,7 +31,7 @@ else
           integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <link rel="stylesheet" href="/themes/light/css/style.css" />
 </head>
-<body>
+<body >
 
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
     <symbol id="bootstrap" viewBox="0 0 118 94">
@@ -106,8 +106,9 @@ else
     </div>
     <div class="px-3 py-2 border-bottom mb-3">
         <div class="container d-flex flex-wrap justify-content-center">
-            <form class="col-12 col-lg-auto mb-2 mb-lg-0 me-lg-auto" role="search">
-                <input type="search" class="form-control" placeholder="Пошук..." aria-label="Search">
+            <form class="col-12 col-lg-auto mb-2 mb-lg-0 me-lg-auto" action="/search/" role="search">
+                <input name="search" type="search" class="form-control" placeholder="Пошук..." aria-label="Search">
+                <button class=" w-100 btn blackButtons btn-primary  "  style="display: none;" type="submit"></button>
             </form>
 
             <div class="text-end">

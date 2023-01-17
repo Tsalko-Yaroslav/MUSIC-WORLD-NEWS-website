@@ -6,6 +6,7 @@ use models\User;
 core\Core::getInstance()->pageParams['title'] = 'Категорії';
 
 ?>
+
 <?php if (User::isAdmin()): ?>
 
     <p style="text-align: center"><a href="/category/add" class="w-20 btn btn-lg btn-primary blackButtons"

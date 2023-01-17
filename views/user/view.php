@@ -6,12 +6,12 @@ $user = $user[0];
 ?>
 
 <div>
-
-    <h2>Ім'я користвувача:</h2>
-    <p><?= $user['Firstname']?> <?= $user['Surname']?></p>
     <?php if (User::isAdmin()):?>
-    <h4>Рівень доступу: <?= $user['access_level']?></h4>
+        <h4>Рівень доступу: <?= $user['access_level']?></h4>
     <?php endif;?>
+    <h2>Що запостив користувач:</h2>
+    <h3><?= $user['Firstname']?> <?= $user['Surname']?></h3>
+
     <?php if (User::isAuthorByParams($user)):?>
         <hr>
         <h1>Пости користувача:</h1>

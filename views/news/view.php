@@ -16,9 +16,11 @@ $id = User::getUserIdByName($news['Author_name']);
 
 $id = $id['id'];
 ?>
-<?php if (User::isAdmin() or User::isAuthor()): ?>
+<?php if (User::isAdmin()): ?>
     <a href="/news/edit/<?= $news['id'] ?>" class="btn btn-sm blackButtons">Редагувати</a>
     <a href="/news/delete/<?= $news['id'] ?>" class="btn btn-sm blackButtons">Видалити</a>
+<?php elseif (User::isAuthor()):?>
+    <a href="/news/edit/<?= $news['id'] ?>" class="btn btn-sm blackButtons">Редагувати</a>
 <?php endif; ?>
 <div>
     <h1><?= $news['News_name'] ?></h1>
@@ -28,7 +30,7 @@ $id = $id['id'];
 </div>
 <hr>
 <div>
-    <img src="<?= $news['Photo_link'] ?>" class="card-img-top" alt="...">
+   <p style="text-align: center"><img width="1000"  src="<?= $news['Photo_link'] ?>" alt="..."></p>
     <hr>
     <?= $news['News_text_content'] ?>
 </div>

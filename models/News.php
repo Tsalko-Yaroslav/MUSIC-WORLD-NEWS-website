@@ -11,38 +11,37 @@ class News
     protected static $userFirstName;
     protected static $userSecondName;
 
-    public static function addNews($row,$path)
+    public static function addNews($row, $path)
     {
-        if(!empty($path)) {
+        if (!empty($path)) {
 
 
             do {
                 $fileName = uniqid() . '.jpg';
                 $newPath = "files/news/{$fileName}";
             } while (file_exists($newPath));
-        }
-        else{
+        } else {
             $newPath = "static/images/NOIMG.jpg";
         }
-        move_uploaded_file($path,$newPath);
+        move_uploaded_file($path, $newPath);
         $user = User::getCurrentAuthenticatedUser();
 
         $userFirstName = $user['Firstname'];
         $userSecondName = $user['Surname'];
         Core::getInstance()->db->insert(self::$tableName, [
-            'Genre_ID'=>$row['Genre_ID'],
-            'News_name'=>$row['News_name'],
-            'short_discription'=>$row['short_discription'],
-            'News_text_content'=>$row['News_text_content'],
-            'Photo_link'=>"../../{$newPath}",
-            'Author_name'=>"$userFirstName $userSecondName",
-            'date'=> date('Y-m-d'),
-            'day_time'=>time('h:m:s')
+            'Genre_ID' => $row['Genre_ID'],
+            'News_name' => $row['News_name'],
+            'short_discription' => $row['short_discription'],
+            'News_text_content' => $row['News_text_content'],
+            'Photo_link' => "../../{$newPath}",
+            'Author_name' => "$userFirstName $userSecondName",
+            'date' => date('Y-m-d')
 
         ]);
 
 
     }
+
     public static function getNewsByAuthor($user)
     {
 
@@ -55,6 +54,7 @@ class News
         return $rows;
 
     }
+
     public static function getNewsByAuthorAs($user)
     {
 
@@ -67,6 +67,7 @@ class News
         return $rows;
 
     }
+
     public static function deleteNews($id)
     {
         Core::getInstance()->db->delete(self::$tableName, [
@@ -76,41 +77,45 @@ class News
 
     public static function updateNews($id, $newRow)
     {
+
         $user = User::getCurrentAuthenticatedUser();
 
         $userFirstName = $user['Firstname'];
         $userSecondName = $user['Surname'];
         Core::getInstance()->db->Update(self::$tableName, [
-            'Genre_ID'=>$newRow['Genre_ID'],
-            'News_name'=>$newRow['News_name'],
-            'short_discription'=>$newRow['short_discription'],
-            'News_text_content'=>$newRow['News_text_content'],
-            'Author_name'=>"$userFirstName $userSecondName",
-            'date'=> date('Y-m-d')
+            'Genre_ID' => $newRow['Genre_ID'],
+            'News_name' => $newRow['News_name'],
+            'short_discription' => $newRow['short_discription'],
+            'News_text_content' => $newRow['News_text_content'],
+            'Author_name' => "$userFirstName $userSecondName",
+            'date' => date('Y-m-d')
         ], [
             'id' => $id
         ]);
     }
-    public static function changePhoto($id,$newPhoto)
+
+    public static function changePhoto($id, $newPhoto)
     {
         self::deletePhotoFile($id);
         do {
             $fileName = uniqid() . '.jpg';
             $newPath = "files/news/{$fileName}";
         } while (file_exists($newPath));
-        move_uploaded_file($newPhoto,$newPath);
-        Core::getInstance()->db->update(self::$tableName,[
+        move_uploaded_file($newPhoto, $newPath);
+        Core::getInstance()->db->update(self::$tableName, [
 
-            'Photo_link' =>"../../{$newPath}"
-        ],[
-            'id'=>$id
+            'Photo_link' => "../../{$newPath}"
+        ], [
+            'id' => $id
         ]);
     }
-    public static function deletePhotoFile($id){
+
+    public static function deletePhotoFile($id)
+    {
         $row = self::getNewsById($id);
         $photoPath = $row['Photo_link'];
 
-        if(is_file($photoPath))
+        if (is_file($photoPath))
             unlink($photoPath);
     }
 
@@ -132,15 +137,22 @@ class News
         ]);
         return $rows;
     }
+
     public static function GetNews()
     {
         $rows = Core::getInstance()->db->select(self::$tableName);
         return $rows;
     }
+
     public static function getSortedNewsASC()
     {
         $rows = Core::getInstance()->db->sortByDate(self::$tableName);
         return $rows;
+    }
+    public static function getSearchNews($row)
+    {
+        $result = Core::getInstance()->db->search(self::$tableName, $row);
+        return $result;
     }
 
 

@@ -61,12 +61,15 @@ class UserController extends Controller
                     'errors' => $errors,
                     'model' => $model
                 ]);
+
             } else {
 
                 User::addUser($_POST['login'], $_POST['password'], $_POST['Surname'], $_POST['Firstname']);
                 $user = User::getUserByLoginAndPassword($_POST['login'], $_POST['password']);
                 User::authenticateUser($user);
-                return $this->RenderViews('register-success');
+                $this->redirect('/');
+                //return $this->RenderViews('register-success');
+
 
             }
 
@@ -122,9 +125,11 @@ class UserController extends Controller
             $user = User::getUserById($id);
             User::updateUser($id, ['access_level' => 2]);
             User::deleteRequest($id);
+            $this->redirect('/user');
         } else {
             return $this->error('403', 'Немає доступу!');
         }
+
     }
 
     public function cancelaccessAction($params)
@@ -132,6 +137,7 @@ class UserController extends Controller
         if (User::isAdmin()) {
             $id = intval($params[0]);
             User::deleteRequest($id);
+            $this->redirect('/user');
         } else {
             return $this->error('403', 'Немає доступу!');
         }

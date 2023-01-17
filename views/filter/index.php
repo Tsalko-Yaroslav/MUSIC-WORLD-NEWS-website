@@ -5,22 +5,22 @@ use \models\User;
 ?>
 <h1>NEWS</h1>
 <?php
-/** @var array $rows */
+
 /** @var array $news */
 
 ?>
 <form method="post" action="/filter/"  >
-<select style="width: 200px" class="form-control" id="filter" name="filter">
+    <select style="width: 200px" class="form-control" id="filter" name="filter">
 
-    <option value="desc">Спочатку найновіші</option>
-    <option value="asc">Спочатку найстаріші</option>
+        <option value="desc">Спочатку найновіші</option>
+        <option value="asc">Спочатку найстаріші</option>
 
-</select>
+    </select>
     <button class=" btn blackButtons btn-primary"  type="submit">Фільтрувати</button>
 </form>
 <hr>
 <div class="row">
-    <?php foreach ($rows as $row): ?>
+    <?php foreach ($news as $row): ?>
         <?php
         $tmpdate = explode('-', $row['date']);
         $date = "{$tmpdate[2]}.{$tmpdate[1]}.{$tmpdate[0]}";

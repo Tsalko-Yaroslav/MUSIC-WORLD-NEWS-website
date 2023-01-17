@@ -86,4 +86,9 @@ class DB
         $res->execute();
         return $res->fetchAll(\PDO::FETCH_ASSOC);
     }
+    public function search($tableName,$searchString){
+        $res = $this->pdo->query(
+            "SELECT * FROM {$tableName} WHERE News_name LIKE '%{$searchString}%' OR short_discription LIKE '%{$searchString}%'");
+        return $res->fetchAll(\PDO::FETCH_ASSOC);
+    }
 }

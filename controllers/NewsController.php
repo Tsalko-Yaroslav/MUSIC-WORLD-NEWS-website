@@ -14,7 +14,7 @@ class NewsController extends Controller
 {
     public function indexAction()
     {
-        $rows = News::getNews();
+        $rows = News::getSortedNewsASC();
         if (User::isAdmin() or User::isAuthor())
             return $this->Render('views/news/index-admin.php', [
                 'rows' => $rows
@@ -74,7 +74,7 @@ class NewsController extends Controller
 
 
         return $this->Render(null, [
-            'rows'=>$rows,
+            'rows' => $rows,
             'news' => $news
         ]);
     }
@@ -88,7 +88,9 @@ class NewsController extends Controller
             return $this->error('403', 'Немає доступу!');
         if ($id > 0) {
             $news = News::getNewsById($id);
+
             if (Core::getInstance()->requestMethod === 'POST') {
+
                 $errors = [];
                 if (empty($_POST['News_name']))
                     $errors['News_name'] = 'Назва порожня';
@@ -96,14 +98,17 @@ class NewsController extends Controller
                     $errors['Genre_ID'] = 'Категорія порожня';
                 if (empty($_POST['short_discription']))
                     $errors['short_discription'] = 'Короткий опис порожній';
-                if (empty($_POST['Author_name']))
-                    $errors['Author_name'] = 'Не вказано ініціали автора';
+
                 if (empty($errors)) {
+
                     News::updateNews($id, $_POST);
+
                     if (!empty($_FILES['Photo_link']['tmp_name'])) {
                         News::changePhoto($id, $_FILES['Photo_link']['tmp_name']);
+
+
                     }
-                    return $this->redirect('/news/index');
+                     $this->redirect('/news/');
                 } else {
                     $model = $_POST;
                     return $this->Render(null, [
@@ -122,6 +127,7 @@ class NewsController extends Controller
             return $this->error('403', 'Немає доступу!');
         }
     }
+
     public function deleteAction($params)
     {
         $id = intval($params[0]);
